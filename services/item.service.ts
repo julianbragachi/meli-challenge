@@ -1,6 +1,6 @@
-import axios from "axios";
-import { ItemMeliResponse } from "../models/ItemMeliResponse";
-import { ItemDescriptionMeliResponse } from "../models/ItemDescriptionMeliResponse";
+import axios from 'axios';
+import { ItemMeliResponse } from '../models/ItemMeliResponse';
+import { ItemDescriptionMeliResponse } from '../models/ItemDescriptionMeliResponse';
 
 class ItemService {
   static async getItem(id: string) {

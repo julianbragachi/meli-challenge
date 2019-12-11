@@ -1,10 +1,10 @@
-import axios from "axios";
-import { NextPage } from "next";
-import Layout from "../../components/Layout";
-import { SearchDTO } from "../../models/SearchDTO";
-import ProductCluster from "../../components/ProductCluster";
-import { Fragment } from "react";
-import CategoriesBreadcrum from "../../components/CategoriesBreadcrum";
+import axios from 'axios';
+import { NextPage } from 'next';
+import Layout from '../../components/Layout';
+import { SearchDTO } from '../../models/SearchDTO';
+import ProductCluster from '../../components/ProductCluster';
+import { Fragment } from 'react';
+import CategoriesBreadcrum from '../../components/CategoriesBreadcrum';
 
 interface Props {
   data: SearchDTO;
@@ -34,10 +34,7 @@ Items.getInitialProps = async props => {
   if (!search) return { data: null as any };
   const params = { q: search };
 
-  const searchResponce = await axios.get<SearchDTO>(
-    "http://localhost:3000/api/search",
-    { params }
-  );
+  const searchResponce = await axios.get<SearchDTO>('http://localhost:3000/api/searchhhh', { params });
 
   return { data: searchResponce.data };
 };

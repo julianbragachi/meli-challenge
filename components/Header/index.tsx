@@ -1,6 +1,6 @@
-import * as React from "react";
-import SearchBar from "../SearchBar";
-import styles from "./header.styles.scss";
+import * as React from 'react';
+import SearchBar from '../SearchBar';
+import styles from './header.styles.scss';
 
 interface Props {}
 

@@ -1,20 +1,17 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import SearchService from "../../../services/search.service";
-import CategoryService from "../../../services/category.service";
-import { SearchDTO, Item } from "../../../models/SearchDTO";
-import { SearchMeliResponse, Result } from "../../../models/SearchMeliResponse";
+import { NextApiRequest, NextApiResponse } from 'next';
+import SearchService from '../../../services/search.service';
+import CategoryService from '../../../services/category.service';
+import { SearchDTO, Item } from '../../../models/SearchDTO';
+import { SearchMeliResponse, Result } from '../../../models/SearchMeliResponse';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { q } = req.query;
-  if (!q)
-    return res.status(500).json({ message: 'QueryParam "Q" is required' });
+  if (!q) return res.status(500).json({ message: 'QueryParam "Q" is required' });
 
   try {
     const response = await SearchService.doSearch(q as string);
     const categoryMostRepeated = getMostRepeatedCategory(response.data.results);
-    const catResponse = await CategoryService.getCategory(
-      categoryMostRepeated as string
-    );
+    const catResponse = await CategoryService.getCategory(categoryMostRepeated as string);
 
     const categories = catResponse.data.path_from_root.map(x => x.name);
     const dto = mapSearchResponse(response.data, categories);
@@ -25,14 +22,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-const mapSearchResponse = (
-  meliResponse: SearchMeliResponse,
-  category: string[]
-): SearchDTO => {
+const mapSearchResponse = (meliResponse: SearchMeliResponse, category: string[]): SearchDTO => {
   const dto = {} as SearchDTO;
 
   dto.categories = category;
-  dto.author = { lastname: "Bragazzi", name: "Julian" };
+  dto.author = { lastname: 'Bragazzi', name: 'Julian' };
   dto.items = meliResponse.results.reduce((acum, value) => {
     const item: Item = {
       id: value.id,
@@ -42,7 +36,7 @@ const mapSearchResponse = (
       price: { amount: value.price, currency: value.currency_id, decimals: 0 },
       picture: value.thumbnail,
       title: value.title,
-      address: `${value.address.state_name}, ${value.address.city_name}`
+      address: `${value.address.state_name}, ${value.address.city_name}`,
     };
 
     acum.push(item);
@@ -66,9 +60,7 @@ const getMostRepeatedCategory = (items: Result[]) => {
 
   const maxValue = Math.max(...Object.values(foo));
 
-  const firstMostRepeatedCategory = Object.keys(foo).find(
-    x => foo[x] === maxValue
-  );
+  const firstMostRepeatedCategory = Object.keys(foo).find(x => foo[x] === maxValue);
 
   return firstMostRepeatedCategory;
 };

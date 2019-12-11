@@ -1,12 +1,7 @@
-import React, {
-  useState,
-  FunctionComponent,
-  ChangeEvent,
-  FormEvent
-} from "react";
-import { useRouter } from "next/router";
-import classNames from "classnames";
-import styles from "./searchBar.styles.scss";
+import React, { useState, FunctionComponent, ChangeEvent, FormEvent } from 'react';
+import { useRouter } from 'next/router';
+import classNames from 'classnames';
+import styles from './searchBar.styles.scss';
 
 interface Props {
   className?: string;
@@ -14,9 +9,8 @@ interface Props {
 
 const SearchBar: FunctionComponent<Props> = ({ className }: Props) => {
   const router = useRouter();
-  const [value, setValue] = useState(
-    router.query.search ? decodeURIComponent(router.query.search as string) : ""
-  );
+  const { search } = router.query;
+  const [value, setValue] = useState(search ? decodeURIComponent(search as string) : '');
 
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     if (e) e.preventDefault();
@@ -30,10 +24,7 @@ const SearchBar: FunctionComponent<Props> = ({ className }: Props) => {
   };
 
   return (
-    <form
-      className={classNames(className, styles.form)}
-      onSubmit={handleFormSubmit}
-    >
+    <form className={classNames(className, styles.form)} onSubmit={handleFormSubmit}>
       <input
         type="text"
         onChange={handleInputChange}
@@ -42,7 +33,7 @@ const SearchBar: FunctionComponent<Props> = ({ className }: Props) => {
         placeholder="Buscar productos, marcas y más…"
         autoFocus
       />
-      <button className={classNames(styles.btnSubmit, "d-flex")}>
+      <button className={classNames(styles.btnSubmit, 'd-flex')}>
         <i className="material-icons">search</i>
       </button>
     </form>

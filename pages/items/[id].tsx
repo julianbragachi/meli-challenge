@@ -1,8 +1,8 @@
-import axios from "axios";
-import { NextPage } from "next";
-import { ItemDTO } from "../../models/ItemDTO";
-import Layout from "../../components/Layout";
-import styles from "./[id].styles.scss";
+import axios from 'axios';
+import { NextPage } from 'next';
+import { ItemDTO } from '../../models/ItemDTO';
+import Layout from '../../components/Layout';
+import styles from './[id].styles.scss';
 
 interface Props {
   data: ItemDTO;
@@ -11,10 +11,10 @@ interface Props {
 const ItemDetail: NextPage<Props> = props => {
   const { picture, sold_quantity, title, price, description } = props.data.item;
   const condition = props.data.item.condition
-    ? props.data.item.condition.toLowerCase() === "new"
-      ? "Nuevo"
-      : "Usado"
-    : "";
+    ? props.data.item.condition.toLowerCase() === 'new'
+      ? 'Nuevo'
+      : 'Usado'
+    : '';
 
   return (
     <Layout>
@@ -49,9 +49,7 @@ ItemDetail.getInitialProps = async props => {
   const { id } = props.query;
   if (!id) return { data: null as any };
 
-  const searchResponce = await axios.get<ItemDTO>(
-    `http://localhost:3000/api/items/${id}`
-  );
+  const searchResponce = await axios.get<ItemDTO>(`http://localhost:3000/api/items/${id}`);
 
   return { data: searchResponce.data };
 };

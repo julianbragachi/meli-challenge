@@ -1,21 +1,19 @@
-import React, { FunctionComponent } from "react";
-import styles from "./categoriesBreadcrum.styles.scss";
-import Link from "next/link";
+import React, { FunctionComponent } from 'react';
+import styles from './categoriesBreadcrum.styles.scss';
+import Link from 'next/link';
 
 interface Props {
   categories: string[];
 }
 
-const CategoriesBreadcrum: FunctionComponent<Props> = ({
-  categories
-}: Props) => (
+const CategoriesBreadcrum: FunctionComponent<Props> = ({ categories }: Props) => (
   <ul className={styles.ul}>
     {categories.map((cat, i, arr) => (
       <li key={`cat-${i}`}>
         <Link
           href={{
-            pathname: "/items",
-            query: { search: encodeURIComponent(cat) }
+            pathname: '/items',
+            query: { search: encodeURIComponent(cat) },
           }}
         >
           <a className={styles.linkItem}>{cat}</a>

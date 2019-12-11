@@ -1,5 +1,5 @@
-import axios from "axios";
-import { CategoryMeliResponse } from "../models/CategoryMeliResponse";
+import axios from 'axios';
+import { CategoryMeliResponse } from '../models/CategoryMeliResponse';
 
 class CategoryService {
   static async getCategory(id: string) {

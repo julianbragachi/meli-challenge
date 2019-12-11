@@ -1,9 +1,7 @@
-import React, { FunctionComponent } from "react";
-import { useRouter } from "next/router";
-import classNames from "classnames";
-import Link from "next/link";
-import styles from "./productCluster.styles.scss";
-import { Item } from "../../models/SearchDTO";
+import React, { FunctionComponent } from 'react';
+import Link from 'next/link';
+import styles from './productCluster.styles.scss';
+import { Item } from '../../models/SearchDTO';
 
 interface Props {
   className?: string;
@@ -14,10 +12,10 @@ const ProductCluster: FunctionComponent<Props> = (props: Props) => {
   const { id, picture, title, price, free_shipping, address } = props.data;
 
   const condition = props.data.condition
-    ? props.data.condition.toLowerCase() === "new"
-      ? "Nuevo"
-      : "Usado"
-    : "";
+    ? props.data.condition.toLowerCase() === 'new'
+      ? 'Nuevo'
+      : 'Usado'
+    : '';
 
   return (
     <div className={styles.container}>
