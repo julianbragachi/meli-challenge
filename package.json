@@ -17,12 +17,14 @@
     "classnames": "^2.2.6",
     "next": "^9.1.5",
     "node-sass": "^4.13.0",
+    "nprogress": "^0.2.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.9",
     "@types/node": "^12.12.16",
+    "@types/nprogress": "^0.2.0",
     "@types/react": "^16.9.16",
     "@zeit/next-css": "^1.0.1",
     "css-loader": "^1.0.1",
