@@ -3,6 +3,7 @@ import { NextPage } from 'next';
 import { ItemDTO } from '../../models/ItemDTO';
 import Layout from '../../components/Layout';
 import styles from './[id].styles.scss';
+import CategoriesBreadcrum from '../../components/CategoriesBreadcrum';
 
 interface Props {
   data: ItemDTO;
@@ -18,6 +19,7 @@ const ItemDetail: NextPage<Props> = props => {
 
   return (
     <Layout>
+      <CategoriesBreadcrum categories={props.data.category} />
       <div className={styles.container}>
         <div className="d-flex mb-5">
           <div className={styles.imgSection}>
@@ -50,6 +52,7 @@ ItemDetail.getInitialProps = async props => {
   if (!id) return { data: null as any };
 
   const searchResponce = await axios.get<ItemDTO>(`http://localhost:3000/api/items/${id}`);
+  const categoriesResponse = await axios.get<ItemDTO>(`http://localhost:3000/api/items/${id}`);
 
   return { data: searchResponce.data };
 };

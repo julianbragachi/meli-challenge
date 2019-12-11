@@ -34,7 +34,7 @@ Items.getInitialProps = async props => {
   if (!search) return { data: null as any };
   const params = { q: search };
 
-  const searchResponce = await axios.get<SearchDTO>('http://localhost:3000/api/searchhhh', { params });
+  const searchResponce = await axios.get<SearchDTO>('http://localhost:3000/api/search', { params });
 
   return { data: searchResponce.data };
 };

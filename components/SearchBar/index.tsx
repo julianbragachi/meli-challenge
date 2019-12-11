@@ -1,4 +1,4 @@
-import React, { useState, FunctionComponent, ChangeEvent, FormEvent } from 'react';
+import React, { useState, FunctionComponent, ChangeEvent, FormEvent, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import classNames from 'classnames';
 import styles from './searchBar.styles.scss';
@@ -11,6 +11,10 @@ const SearchBar: FunctionComponent<Props> = ({ className }: Props) => {
   const router = useRouter();
   const { search } = router.query;
   const [value, setValue] = useState(search ? decodeURIComponent(search as string) : '');
+
+  useEffect(() => {
+    if (search) setValue(decodeURIComponent(search as string));
+  }, [search]);
 
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     if (e) e.preventDefault();

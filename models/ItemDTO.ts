@@ -1,8 +1,9 @@
-import { Item } from "./SearchDTO";
+import { Item } from './SearchDTO';
 
 export interface ItemDTO {
   author: Author;
   item: ItemWithDescription;
+  category: string[];
 }
 
 interface Author {

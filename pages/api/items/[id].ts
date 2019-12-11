@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import ItemService from '../../../services/item.service';
+import CategoryService from '../../../services/category.service';
 import { ItemDTO } from '../../../models/ItemDTO';
 import { ItemMeliResponse } from '../../../models/ItemMeliResponse';
 import { ItemDescriptionMeliResponse } from '../../../models/ItemDescriptionMeliResponse';
@@ -7,8 +8,15 @@ import { ItemDescriptionMeliResponse } from '../../../models/ItemDescriptionMeli
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { id } = req.query;
   Promise.all([ItemService.getItem(id as string), ItemService.getItemDescription(id as string)])
-    .then(([item, itemDescription]) => {
+    .then(async ([item, itemDescription]) => {
       const data = mapSearchResponse(item.data, itemDescription.data);
+
+      const categoryresponse = await CategoryService.getCategory(item.data.category_id) //
+        .catch(err => res.status(500).json({ statusCode: 500, message: err.message }));
+      if (!categoryresponse) return;
+
+      data.category = categoryresponse.data.path_from_root.map(x => x.name);
+
       res.status(200).json(data);
     })
     .catch(err => {
