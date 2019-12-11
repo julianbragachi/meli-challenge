@@ -4,6 +4,7 @@ import React, {
   ChangeEvent,
   FormEvent
 } from "react";
+import { useRouter } from "next/router";
 import classNames from "classnames";
 import styles from "./searchBar.styles.scss";
 
@@ -12,13 +13,14 @@ interface Props {
 }
 
 const SearchBar: FunctionComponent<Props> = ({ className }: Props) => {
-  const [value, setValue] = useState("");
+  const router = useRouter();
+  const [value, setValue] = useState(router.query.search || "");
 
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     if (e) e.preventDefault();
     if (!value) return;
 
-    alert("Estas buscando: " + value);
+    router.push(`/items?search=${value}`);
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {

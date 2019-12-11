@@ -1,5 +1,4 @@
-import * as React from "react";
-// import Link from "next/link";
+import React, { Fragment } from "react";
 import Head from "next/head";
 import Header from "../Header";
 import "./layout.styles.scss";
@@ -9,7 +8,7 @@ interface Props {
 }
 
 const Layout: React.FunctionComponent<Props> = ({ children }) => (
-  <React.Fragment>
+  <Fragment>
     <Head>
       <title>Mercado Libre Argentina</title>
       <meta charSet="utf-8" />
@@ -27,7 +26,7 @@ const Layout: React.FunctionComponent<Props> = ({ children }) => (
     </Head>
     <Header></Header>
     <main className="container mt-4">{children}</main>
-  </React.Fragment>
+  </Fragment>
 );
 
 export default Layout;

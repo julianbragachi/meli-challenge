@@ -31,7 +31,8 @@ const mapSearchResponse = (meliResponse: SearchMeliResponse): SearchDTO => {
       // TODO: En el documento en el objecto price tiene un attr decimal, cual seria el mapeo correcto?
       price: { amount: value.price, currency: value.currency_id, decimals: 0 },
       picture: value.thumbnail,
-      title: value.title
+      title: value.title,
+      address: `${value.address.state_name}, ${value.address.city_name}`
     };
 
     acum.push(item);
