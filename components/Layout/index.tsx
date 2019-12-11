@@ -5,7 +5,7 @@ import Header from "../Header";
 import "./layout.styles.scss";
 
 interface Props {
-  children: any;
+  children?: any;
 }
 
 const Layout: React.FunctionComponent<Props> = ({ children }) => (
