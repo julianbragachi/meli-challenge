@@ -5,29 +5,30 @@ import { SearchDTO } from "../models/SearchDTO";
 import ProductCluster from "../components/ProductCluster";
 
 interface Props {
-  data?: SearchDTO;
+  data: SearchDTO;
 }
 
 const Items: NextPage<Props> = props => {
   const { data } = props;
 
-  if (!data) return <h1>ERROR</h1>;
-
   return (
     <Layout>
-      {data.items.map((item, i) => (
-        <ProductCluster data={item} key={`product-${i}`} />
-      ))}
+      {data ? (
+        data.items.map((item, i) => (
+          <ProductCluster data={item} key={`product-${i}`} />
+        ))
+      ) : (
+        <h1>No se han encontrado resultados</h1>
+      )}
     </Layout>
   );
 };
 
 Items.getInitialProps = async props => {
   const { search } = props.query;
-
-  if (!search) return {};
-
+  if (!search) return { data: null as any };
   const params = { q: search };
+
   const searchResponce = await axios.get<SearchDTO>(
     "http://localhost:3000/api/search",
     { params }
