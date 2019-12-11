@@ -3,6 +3,8 @@ import { NextPage } from "next";
 import Layout from "../../components/Layout";
 import { SearchDTO } from "../../models/SearchDTO";
 import ProductCluster from "../../components/ProductCluster";
+import { Fragment } from "react";
+import CategoriesBreadcrum from "../../components/CategoriesBreadcrum";
 
 interface Props {
   data: SearchDTO;
@@ -14,9 +16,12 @@ const Items: NextPage<Props> = props => {
   return (
     <Layout>
       {data ? (
-        data.items.map((item, i) => (
-          <ProductCluster data={item} key={`product-${i}`} />
-        ))
+        <Fragment>
+          <CategoriesBreadcrum categories={data.categories} />
+          {data.items.map((item, i) => (
+            <ProductCluster data={item} key={`product-${i}`} />
+          ))}
+        </Fragment>
       ) : (
         <h1>No se han encontrado resultados</h1>
       )}

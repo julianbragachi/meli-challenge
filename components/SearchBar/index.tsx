@@ -14,7 +14,9 @@ interface Props {
 
 const SearchBar: FunctionComponent<Props> = ({ className }: Props) => {
   const router = useRouter();
-  const [value, setValue] = useState(router.query.search || "");
+  const [value, setValue] = useState(
+    router.query.search ? decodeURIComponent(router.query.search as string) : ""
+  );
 
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     if (e) e.preventDefault();

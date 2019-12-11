@@ -86,7 +86,7 @@ interface DifferentialPricing {
   id: number;
 }
 
-interface Result {
+export interface Result {
   id: string;
   site_id: string;
   title: string;

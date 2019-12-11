@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import SearchService from "../../../services/search.service";
+import CategoryService from "../../../services/category.service";
 import { SearchDTO, Item } from "../../../models/SearchDTO";
-import { SearchMeliResponse } from "../../../models/SearchMeliResponse";
+import { SearchMeliResponse, Result } from "../../../models/SearchMeliResponse";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { q } = req.query;
@@ -10,8 +11,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     const response = await SearchService.doSearch(q as string);
+    const categoryMostRepeated = getMostRepeatedCategory(response.data.results);
+    const catResponse = await CategoryService.getCategory(
+      categoryMostRepeated as string
+    );
 
-    const dto = mapSearchResponse(response.data);
+    const categories = catResponse.data.path_from_root.map(x => x.name);
+    const dto = mapSearchResponse(response.data, categories);
 
     res.status(200).json(dto);
   } catch (err) {
@@ -19,9 +25,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-const mapSearchResponse = (meliResponse: SearchMeliResponse): SearchDTO => {
+const mapSearchResponse = (
+  meliResponse: SearchMeliResponse,
+  category: string[]
+): SearchDTO => {
   const dto = {} as SearchDTO;
 
+  dto.categories = category;
   dto.author = { lastname: "Bragazzi", name: "Julian" };
   dto.items = meliResponse.results.reduce((acum, value) => {
     const item: Item = {
@@ -41,4 +51,24 @@ const mapSearchResponse = (meliResponse: SearchMeliResponse): SearchDTO => {
   }, [] as Item[]);
 
   return dto;
+};
+
+const getMostRepeatedCategory = (items: Result[]) => {
+  const foo = items.reduce((acum, value) => {
+    if (acum[value.category_id]) {
+      acum[value.category_id] += 1;
+    } else {
+      acum[value.category_id] = 1;
+    }
+
+    return acum;
+  }, {} as { [key: string]: number });
+
+  const maxValue = Math.max(...Object.values(foo));
+
+  const firstMostRepeatedCategory = Object.keys(foo).find(
+    x => foo[x] === maxValue
+  );
+
+  return firstMostRepeatedCategory;
 };
