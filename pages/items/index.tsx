@@ -1,8 +1,8 @@
 import axios from "axios";
 import { NextPage } from "next";
-import Layout from "../components/Layout";
-import { SearchDTO } from "../models/SearchDTO";
-import ProductCluster from "../components/ProductCluster";
+import Layout from "../../components/Layout";
+import { SearchDTO } from "../../models/SearchDTO";
+import ProductCluster from "../../components/ProductCluster";
 
 interface Props {
   data: SearchDTO;
