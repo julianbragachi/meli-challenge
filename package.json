@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start",
     "test": "jest",
     "prettier": "prettier --config ./.prettierrc --write",
     "tslint": "tslint -c ./tslint.json -p tsconfig.json --format codeFrame"
