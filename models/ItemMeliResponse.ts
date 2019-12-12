@@ -61,8 +61,6 @@ interface SellerAddress {
   id: number;
 }
 
-interface Location {}
-
 interface Geolocation {
   latitude: number;
   longitude: number;
@@ -128,7 +126,7 @@ export interface ItemMeliResponse {
   international_delivery_mode: string;
   seller_address: SellerAddress;
   seller_contact?: any;
-  location: Location;
+  location: any;
   geolocation: Geolocation;
   coverage_areas: any[];
   attributes: Attribute[];

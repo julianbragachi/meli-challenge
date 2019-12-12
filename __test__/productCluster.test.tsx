@@ -71,7 +71,7 @@ describe('ProductCluster Component', () => {
 
   it('renders the props of link component', () => {
     const item = getMockItem();
-    let wrapper = shallow(<ProductCluster data={item} />);
+    const wrapper = shallow(<ProductCluster data={item} />);
 
     expect(wrapper.find(Link).prop('href')).toBe('items/ML-un-id-falso');
   });

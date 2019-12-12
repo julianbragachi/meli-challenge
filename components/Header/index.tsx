@@ -2,9 +2,7 @@ import * as React from 'react';
 import SearchBar from '../SearchBar';
 import styles from './header.styles.scss';
 
-interface Props {}
-
-const Header: React.FunctionComponent = ({}: Props) => (
+const Header: React.FunctionComponent = () => (
   <header className={styles.header}>
     <div className="container">
       <div className="row">

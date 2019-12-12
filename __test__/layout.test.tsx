@@ -8,7 +8,7 @@ describe('Layout Component', () => {
 
     const wrapper = shallow(<Layout title={title} />);
 
-    expect(wrapper.find('title').text()).toEqual(title + ' | Mercado Libre');
+    expect(wrapper.find('title').text()).toEqual(`${title} | Mercado Libre`);
   });
 
   it('renders the component with children', () => {
@@ -17,6 +17,7 @@ describe('Layout Component', () => {
     const MockComponent = () => <h1>{childText}</h1>;
 
     const wrapper = shallow(
+      // tslint:disable-next-line: jsx-wrap-multiline
       <Layout title="Hola">
         <MockComponent />
       </Layout>,

@@ -11,7 +11,6 @@ interface Props {
 }
 
 Router.events.on('routeChangeStart', url => {
-  console.log(`Loading: ${url}`);
   NProgress.start();
 });
 Router.events.on('routeChangeComplete', () => NProgress.done());
@@ -34,7 +33,7 @@ const Layout: React.FunctionComponent<Props> = ({ children, title }) => (
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
       <link href="https://unpkg.com/nprogress@0.2.0/nprogress.css" rel="stylesheet" />
     </Head>
-    <Header></Header>
+    <Header />
     <main className="container mt-4">{children}</main>
   </Fragment>
 );
