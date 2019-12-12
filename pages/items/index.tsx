@@ -14,7 +14,7 @@ const Items: NextPage<Props> = props => {
   const { data } = props;
 
   return (
-    <Layout>
+    <Layout title={'Resultados'}>
       {data ? (
         <Fragment>
           <CategoriesBreadcrum categories={data.categories} />

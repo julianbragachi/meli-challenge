@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import classNames from 'classnames';
 import Link from 'next/link';
 import styles from './productCluster.styles.scss';
 import { Item } from '../../models/SearchDTO';
@@ -12,13 +13,13 @@ const ProductCluster: FunctionComponent<Props> = (props: Props) => {
   const { id, picture, title, price, free_shipping, address } = props.data;
 
   const condition = props.data.condition
-    ? props.data.condition.toLowerCase() === 'new'
-      ? 'Nuevo'
-      : 'Usado'
+    ? (props.data.condition.toLowerCase() === 'new' && 'Nuevo') ||
+      (props.data.condition.toLowerCase() === 'used' && 'Usado') ||
+      ''
     : '';
 
   return (
-    <div className={styles.container}>
+    <div className={classNames(styles.container, props.className)}>
       <div>
         <img src={picture} />
       </div>
@@ -30,7 +31,7 @@ const ProductCluster: FunctionComponent<Props> = (props: Props) => {
           {price.currency} {price.amount}
         </p>
         <p className={styles.address}>{address}</p>
-        {condition && <p>{condition}</p>}
+        {condition && <p id="div-condition">{condition}</p>}
         {free_shipping && <p className={styles.shipping}>Envio gratis!</p>}
       </div>
     </div>

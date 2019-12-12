@@ -64,3 +64,5 @@ const getMostRepeatedCategory = (items: Result[]) => {
 
   return firstMostRepeatedCategory;
 };
+
+export { getMostRepeatedCategory };

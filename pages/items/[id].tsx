@@ -18,7 +18,7 @@ const ItemDetail: NextPage<Props> = props => {
     : '';
 
   return (
-    <Layout>
+    <Layout title={title}>
       <CategoriesBreadcrum categories={props.data.category} />
       <div className={styles.container}>
         <div className="d-flex mb-5">
@@ -52,7 +52,6 @@ ItemDetail.getInitialProps = async props => {
   if (!id) return { data: null as any };
 
   const searchResponce = await axios.get<ItemDTO>(`http://localhost:3000/api/items/${id}`);
-  const categoriesResponse = await axios.get<ItemDTO>(`http://localhost:3000/api/items/${id}`);
 
   return { data: searchResponce.data };
 };
