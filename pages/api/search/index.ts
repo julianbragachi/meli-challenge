@@ -9,7 +9,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (!q) return res.status(500).json({ message: 'QueryParam "Q" is required' });
 
   try {
-    const response = await SearchService.doSearch(q as string);
+    const response = await SearchService.doSearch(q as string, 4);
     const categoryMostRepeated = getMostRepeatedCategory(response.data.results);
     const catResponse = await CategoryService.getCategory(categoryMostRepeated as string);
 
