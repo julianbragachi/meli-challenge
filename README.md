@@ -1,10 +1,11 @@
 # meli-challenge 🚀
 
-### Instalación y ejecucion 🔧
+### Instalación y ejecución 🔧
 
 ```
 npm install
 npm run dev
+http://localhost:3000/
 ```
 
 ### Tests 🔩
